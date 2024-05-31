@@ -1,56 +1,9 @@
-import { Terminal } from '@xterm/xterm';
-import { FitAddon } from '@xterm/addon-fit';
+import {term } from "./terminal";
 
-var terminaItem = document.getElementById('terminal');
+import { sendMessageToAO, getMessageFromAO, sendToComputerUnit, getProcessResults} from "./ao-connect";
 
-const term = new Terminal({
-    theme: {
-        foreground: '#F8F8F8',
-        background: '#2D2E2C',
-        selection: '#5DA5D533',
-        black: '#1E1E1D',
-        brightBlack: '#262625',
-        red: '#CE5C5C',
-        brightRed: '#FF7272',
-        green: '#5BCC5B',
-        brightGreen: '#72FF72',
-        yellow: '#CCCC5B',
-        brightYellow: '#FFFF72',
-        blue: '#5D5DD3',
-        brightBlue: '#7279FF',
-        magenta: '#BC5ED1',
-        brightMagenta: '#E572FF',
-        cyan: '#5DA5D5',
-        brightCyan: '#72F0FF',
-        white: '#F8F8F8',
-        brightWhite: '#FFFFFF'
-    },
-    cursorBlink: true,
-    allowProposedApi: true
-});
-            
-term.open(terminaItem);
-term.write("aos> ");
-term.onData(e => {
-    switch (e) {
-        case '\u0003': // Ctrl+C
-            term.write('^C');
-        break;
-        case '\r': // Enter
-            term.write('\r\naos> ');
-        break;
-        case '\u007F': // Backspace (DEL)
-        // Do not delete the prompt
-        if (term._core.buffer.x > 2) {
-            term.write('\b \b');
-        }
-        break;
-        default: // Print all other characters for demo
-        if (e >= String.fromCharCode(0x20) && e <= String.fromCharCode(0x7E) || e >= '\u00a0') {
-            term.write(e);
-        }
-    }
-    });
+let terminalItem = document.getElementById('terminal');
+term.open(terminalItem);
 
 // token addresses
 const _CRED = "Sa0iBLPNyJQrwpTTG-tWLQU-1QeUAJA73DdxGGiKoJc";
@@ -79,6 +32,7 @@ let loader = document.getElementById('AOUILoader');
 let walletDisconnectCall = false;
 let processConnectButton = document.getElementById("ConnectToAos");
 var connectedWalletPid = document.getElementById('ConnectedWalletPid');
+var sendHello = document.getElementById('SendHello');
 
 checkConnection();
 
@@ -91,6 +45,7 @@ addEventListener("walletSwitch", (e) => {
     // handle wallet switch
   if (!walletDisconnectCall) {
     userAddress = e.detail.address;
+    localStorage.setItem('userAddress',userAddress);
     walletConnected(userAddress);
   }
 });
@@ -102,7 +57,8 @@ processConnectButton.addEventListener('click', async () => {
   success.then(function(result) {
     term.write("Connected successfully.\r\n");
     term.write("Process id :" + connectedWalletPid.value + "\r\n");
-    term.write("aos> ")
+    term.prompt()
+    localStorage.setItem('connectedPid',connectedWalletPid.value);
   });
   
   
@@ -126,6 +82,7 @@ walletConnectButton.addEventListener('click', async () => {
 
           );
           userAddress = await window.arweaveWallet.getActiveAddress();
+          localStorage.setItem('userAddress',userAddress);
           walletConnected(userAddress);
 
       } catch (error) {
@@ -313,35 +270,24 @@ async function connectPidtoAos(address, name="") {
       // todo
 
       loaderShow(); 
-      const response = await axios.get("https://cu62.ao-testnet.xyz/results/"+ connectedWalletPid.value +"?sort=DESC&limit=1");
-      console.log(response.data);
+      const response = await axios.get("https://cu"+ getRandomNumber(1,100) +".ao-testnet.xyz/results/"+ connectedWalletPid.value +"?sort=DESC&limit=1");
+      getProcessResults(connectedWalletPid.value, 2).then(function(response) {
+          response.edges.forEach(edge=> {
+            
+              if (typeof(edge.node.Output.data) === "string") {
+                if (edge.node.Output.data !== "" || edge.node.Output.data !== null) {
+                  term.write(edge.node.Output.data+"\r\n");
+                  term.write(edge.node.Output.prompt);
+                }
+            } else if (typeof(edge.node.Output.data) === "object") {
+                term.write(edge.node.Output.data.json+"\r\n");
+                term.write(edge.node.Output.data.prompt);
+            }
+
+          });
+      });
       loaderHide();
       return response.data;
-
-}
-
-
-async function getCU(process, owner, processTx, type) {
-
- //todo
-
-}
-
-async function getMU(process, owner, processTx, type) {
-
-  //todo
-
-}
-
-async function sendCU(process, owner, processTx, type) {
-
- //todo
-
-}
-
-async function sendMU(process, owner, processTx, type) {
-
- //todo
 
 }
 

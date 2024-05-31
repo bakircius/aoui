@@ -12,6 +12,8 @@
         <script src="https://unpkg.com/arweave/bundles/web.bundle.min.js"></script>
         <script src="node_modules/@xterm/xterm/lib/xterm.js"></script>
         <script src="base.js" async defer type="module"></script>
+        <script src="terminal.js" async defer type="module"></script>
+        <script src="ao-connect.js" async defer type="module"></script>
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Teachers:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
@@ -40,7 +42,7 @@
 
                 <div class="wallet-connect">
                     <a id="ConnectArConnect" class="btn arconnect-btn hide">CONNECT</a>
-                    <a id="DisconnectArConnect" class="btn arconnect-btn hide">DISCONNECT</a>
+                    <a id="DisconnectArConnect" class="arconnect-btn hide">DISCONNECT</a>
                 </div>
 
             </header>
@@ -77,6 +79,7 @@
                             <h3>Connected Wallet Processes</h3>
                             <select name="Process Ids" id="ConnectedWalletPid"></select>
                             <button class="btn" id="ConnectToAos">Connect Process to AOS</button>
+                            <button class="btn" id="SendHello">Send "Hello Aos"</button>
                         </div>
                        
                         

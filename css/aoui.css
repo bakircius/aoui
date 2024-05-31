@@ -28,7 +28,7 @@ main {
     background-color: #FFF;
     padding: 20px 40px;
     width: 100vw;
-    text-align: center;
+    text-align: left;
     color: #383838;
     height: 80px;
     line-height: 80px;
@@ -96,13 +96,7 @@ section {
     min-height: 300px;
 }
 
-.editor-wrapper {
-    width: 800px;
-    height: 300px;
-    padding: 10px;
-    background-color: #1E1E1E;
-    border-radius:10px;
-}
+
 
 q {
     padding:20px 0;
@@ -195,6 +189,13 @@ display: none;
     flex-direction: row;
 }
 
+.editor-wrapper {
+    width: 800px;
+    padding: 10px;
+    background-color: #000;
+    border-radius:10px;
+}
+
 .column-three {
     width: 60vw;
 }
@@ -236,4 +237,17 @@ h3 {
 .btn:hover{
     background-color: #ff5900;
     cursor: pointer;
+}
+
+
+.xterm .xterm-viewport {
+    /* On OS X this is required in order for the scroll bar to appear fully opaque */
+    background-color: #000;
+    overflow-y :hidden;
+    cursor: default;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
 }
