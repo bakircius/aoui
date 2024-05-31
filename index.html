@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>AO UI by bakircius</title>
+        <meta name="description" content="AOUI">
+        <meta name="author" content="bakircius">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://unpkg.com/arweave/bundles/web.bundle.min.js"></script>
+        <script src="node_modules/@xterm/xterm/lib/xterm.js"></script>
+        <script src="base.js" async defer type="module"></script>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Teachers:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="https://unpkg.com/@xterm/xterm/css/xterm.css" />
+            <link rel="stylesheet" href="css/loader.css">
+            <link rel="stylesheet" href="css/aoui.css">
+    </head>
+    <body>
+      <div id="app"></div>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+            <header>
+                
+                <div class="logo">
+                    <img src="img/bakirciuslogo.png" alt="" width="40" height="40">
+                    <span><b>AO</b>UI</span>
+                </div>
+
+                <ul class="menu">
+                    <li><a href="#" id="AosComputerLink" class="active">AOS COMPUTER</a></li>
+                    <li><a href="#" id="AosGameLink">AOS GAME</a></li>
+                    <li><a href="#" id="AosDiscordLink">DISCORD DEV-CHAT</a></li>
+                    <li><a href="#" id="AosMemeframeLink">MEMEFRAME</a></li>
+                </ul>
+
+                <div class="wallet-connect">
+                    <a id="ConnectArConnect" class="btn arconnect-btn hide">CONNECT</a>
+                    <a id="DisconnectArConnect" class="btn arconnect-btn hide">DISCONNECT</a>
+                </div>
+
+            </header>
+            <main>
+                <section class="hero">
+                    <strong>AO Computer UI</strong> Where Function Meets Design in Parallel Processing
+                </section>
+                
+                <section class="wallet-info-box">
+
+                    <div id="WalletBalances" class="wallet-balances"></div>
+                    
+                    <div id="AOUILoader" class="loader-item hide">
+                        <i class="loader"></i>
+                    </div>
+
+                </section>
+             <!--    <section id="AosHome" class="dashboard">
+                    <h3>Welcome Home Screen</h3>
+                    <p>You can explore AOS CONSOLE page from main menu which is attached above.</p>
+                </section>
+ -->            
+
+                    <section class="aos-container">
+
+                        <div class="column-three">
+                            <div class="editor-wrapper">
+                                <div id="terminal"></div>                           
+                                                            
+                            </div>
+                        </div>
+                        <div class="column-one">
+
+                            <h3>Connected Wallet Processes</h3>
+                            <select name="Process Ids" id="ConnectedWalletPid"></select>
+                            <button class="btn" id="ConnectToAos">Connect Process to AOS</button>
+                        </div>
+                       
+                        
+                        
+                    </section>
+
+            </main>
+
+
+        
+        
+    
+    </body>
+</html>
