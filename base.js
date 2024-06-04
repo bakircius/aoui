@@ -9,7 +9,7 @@ term.open(terminalItem);
 const _CRED = "Sa0iBLPNyJQrwpTTG-tWLQU-1QeUAJA73DdxGGiKoJc";
 const _ORBIT = "BUhZLMwQ6yZHguLtJYA5lLUa9LQzLXMXRfaq9FVcPJc";
 const _EXP = "aYrCboXVSl1AXL9gPFe3tfRxRf0ZmkOXH65mKT0HHZw";
-const tokens = [_CRED, _EXP]; //get these token balances from connected wallet
+const tokens = [_CRED, _EXP, _ORBIT]; //get these token balances from connected wallet
 
 var userAddress = "";
 
